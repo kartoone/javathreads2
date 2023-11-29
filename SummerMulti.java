@@ -1,8 +1,9 @@
-public class SummerMulti {
+public class SummerMulti extends Thread {
 
     protected int mat1d[];
     protected int start;
     protected int length;
+    protected long total; // our total
 
     // take in the shared memory reference 
     // as well as our starting and how many numbers we should add
@@ -13,11 +14,15 @@ public class SummerMulti {
     }
 
     // computer our subtotal
-    public long computeSum() {
-        long total = 0L;
+    public void computeSum() {
+        total = 0L;
         for (int i = start; i < start + length; i++) {
             total += mat1d[i];
         }
-        return total;
+    }
+
+    @Override
+    public void run() {
+        this.computeSum();
     }
 }
